@@ -1,0 +1,13 @@
+@media (max-width: 600px) {
+    .container {
+      width: 100%;
+    }
+}
+div.Home_page_picture{
+    text-align: center;
+    width: auto; /* must to set it  */
+    margin: auto;
+}
+body{
+    background-color: #F8FED9;
+}
