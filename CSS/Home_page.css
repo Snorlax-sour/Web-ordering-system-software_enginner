@@ -7,7 +7,13 @@ div.Home_page_picture{
     text-align: center;
     width: auto; /* must to set it  */
     margin: auto;
+    box-sizing: content-box;
 }
 body{
     background-color: #F8FED9;
+}
+button{
+    background-color: #9E1ADB;  
+    width: 600px;
+    height: 60px;
 }
