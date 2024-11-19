@@ -1,0 +1,90 @@
+/* 樣式設置 */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 頂部圖片區域 */
+.header {
+    width: 100%;
+    text-align: center;
+}
+
+.header-img {
+    width: 100%;
+    height: auto;
+}
+
+/* 分類標籤 */
+.categories {
+    display: flex;
+    justify-content: space-around;
+    background-color: #FFF2CC; /* 淡黃色背景 */
+    padding: 10px 0;
+}
+
+.category {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: black;
+}
+
+/* 菜單內容 */
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    background-color: #C4E0F9; /* 藍色背景 */
+    margin: 10px 0;
+    padding: 10px;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.item-details h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.item-details p {
+    margin: 5px 0 0 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 底部導航欄 */
+.footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #B8E0F9; /* 淡藍色背景 */
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+}
+
+.nav-btn img {
+    width: 30px;
+    height: 30px;
+}
