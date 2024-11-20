@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>菜單</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜單分類</title>
     <link rel="stylesheet" href="../CSS/Menu.css">
 </head>
 <body>
@@ -15,29 +15,73 @@
     <!-- 可滑動分類標籤 -->
     <div class="categories-wrapper">
         <div class="categories">
-            <div class="category">主餐</div>
-            <div class="category">副餐</div>
-            <div class="category">飲料</div>
-            <div class="category">甜點</div>
+            <div class="category" onclick="showCategory('main')">主餐</div>
+            <div class="category" onclick="showCategory('side')">副餐</div>
+            <div class="category" onclick="showCategory('drink')">飲料</div>
+            <div class="category" onclick="showCategory('dessert')">甜點</div>
         </div>
     </div>
 
     <!-- 菜單內容 -->
-    <div class="menu">
-        <!-- 義大利鳳梨炒飯 -->
-        <div class="menu-item">
+    <div id="menu" class="menu">
+        <!-- 預設顯示主餐 -->
+        <div class="menu-item" data-category="main">
             <img src="../IMAGE/fired_rice.webp" alt="義大利鳳梨炒飯">
             <div class="item-details">
                 <h3>義大利鳳梨炒飯</h3>
                 <p>成份：鳳梨、飯、蛋、醬油、雞蛋、蝦仁、蔥、蕃茄</p>
             </div>
         </div>
-        <!-- 海鮮披薩 -->
-        <div class="menu-item">
+        <div class="menu-item" data-category="main">
             <img src="../IMAGE/seafood_pizza.png" alt="海鮮披薩">
             <div class="item-details">
                 <h3>海鮮披薩</h3>
                 <p>成份：花枝、蝦仁、蟹條、海苔粉</p>
+            </div>
+        </div>
+        <!-- 副餐 -->
+        <div class="menu-item" data-category="side" style="display: none;">
+            <img src="https://example.com/fries.jpg" alt="薯條">
+            <div class="item-details">
+                <h3>薯條</h3>
+                <p>成份：馬鈴薯、鹽、油</p>
+            </div>
+        </div>
+        <div class="menu-item" data-category="side" style="display: none;">
+            <img src="https://example.com/salad.jpg" alt="沙拉">
+            <div class="item-details">
+                <h3>沙拉</h3>
+                <p>成份：生菜、番茄、醬料</p>
+            </div>
+        </div>
+        <!-- 飲料 -->
+        <div class="menu-item" data-category="drink" style="display: none;">
+            <img src="https://example.com/coffee.jpg" alt="咖啡">
+            <div class="item-details">
+                <h3>咖啡</h3>
+                <p>成份：咖啡豆、水、牛奶</p>
+            </div>
+        </div>
+        <div class="menu-item" data-category="drink" style="display: none;">
+            <img src="https://example.com/juice.jpg" alt="果汁">
+            <div class="item-details">
+                <h3>果汁</h3>
+                <p>成份：新鮮水果</p>
+            </div>
+        </div>
+        <!-- 甜點 -->
+        <div class="menu-item" data-category="dessert" style="display: none;">
+            <img src="https://example.com/cake.jpg" alt="蛋糕">
+            <div class="item-details">
+                <h3>蛋糕</h3>
+                <p>成份：麵粉、奶油、糖</p>
+            </div>
+        </div>
+        <div class="menu-item" data-category="dessert" style="display: none;">
+            <img src="https://example.com/ice-cream.jpg" alt="冰淇淋">
+            <div class="item-details">
+                <h3>冰淇淋</h3>
+                <p>成份：牛奶、糖、巧克力</p>
             </div>
         </div>
     </div>
@@ -51,5 +95,7 @@
             <img src="https://example.com/cart-icon.png" alt="購物車">
         </button>
     </div>
+
+    <script src="../JS/Menu.js"></script>
 </body>
 </html>
