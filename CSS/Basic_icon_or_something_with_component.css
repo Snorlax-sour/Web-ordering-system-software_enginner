@@ -1,0 +1,20 @@
+/* class name: home_icon with (common) <img> tag*/
+.HOME_ICON{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    margin: 10px; /* Adjust the margin as needed */
+    width: 10%;
+    height: 10%;
+}
+/* class name: Pale_blue_background with (common) <body> tag */
+.Pale_blue_background {
+    background-color: #92FFF2;
+
+}
+.Purple_button{
+    background-color: #9E1ADB; /* 顏色不太一樣，在figma是用2個顏色疊出來的== */
+}
+/* 
+    The Basic of element, the file name need to change it!!(if have a better) - 2024/11/27
+*/
