@@ -11,14 +11,16 @@
     <body class="Pale_blue_background">
         <a href="./HOME_PAGE.html"> <img class="HOME_ICON" src="../IMAGE/HOME_ICON.png" alt="回到首頁">  </a>
         
-        <form> 
-            <label for="Account" > Account: </label> <br>
+        <form id="Input_bar"> 
+            <label for="Account_input_box" > Account:</label> <br>
              <!-- the label uncessary but good for search engine optimation (SEO) and crawlers -->
-            <input id="Account_input_box" type="text" placeholder="請輸入您的帳號"> <br>
+              <!-- label for need to match id -->
+            <input id="Account_input_box" type="text" placeholder="請輸入您的帳號" class="Account_info"> <br>
             <!-- placeholder attribute name is the prompt -->
-            <label for="Password"> Password: </label> <br>
-            <input id="Password_input_box" type="password" placeholder="請輸入您的密碼"> <br>
+            <label for="Password_input_box"> Password: </label> <br>
+            <input id="Password_input_box" type="password" placeholder="請輸入您的密碼" class="Account_info"> <br>
             <button type="submit" class="Purple_button" >  驗證帳號密碼 </button>
         </form>
+        <script src="../JS/Login.js"></script>
     </body>
 </html>
