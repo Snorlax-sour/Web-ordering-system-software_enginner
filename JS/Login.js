@@ -1,6 +1,6 @@
 const Account_info = document.querySelector(".Account_info");
 const Purple_button = document.querySelector(".Purple_button");
-
+const form = document.getElementById("Input_bar");
 function Read_content(){
     if(Account_info.value === ""){
         return ;
