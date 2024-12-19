@@ -1,14 +1,28 @@
-@media (max-width: 600px) {
+@media (max-width: 678px) {
     .container {
       width: 100%;
     }
 }
-div.Home_page_picture{
+div {
     text-align: center;
     width: auto; /* must to set it  */
     margin: auto;
     box-sizing: content-box;
 }
+header {
+    text-align: center;
+    width: auto; /* must to set it  */
+    margin: auto; /* 維持彼此的間距 */
+    box-sizing: content-box;
+}
+header img {
+    text-align: center;
+    width: auto; /* must to set it  */
+    height: 50vh;
+    margin: auto;
+    box-sizing: content-box;
+}
+
 body{
     background-color: #F8FED9;
 }
@@ -16,4 +30,5 @@ button{
     background-color: #9E1ADB;  
     width: 600px;
     height: 60px;
+    border-radius: 5px;
 }

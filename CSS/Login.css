@@ -1,5 +1,14 @@
 #Input_bar{
     display: flex;
+
+}
+#Account_input_box{
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}
+#Password_input_box{
+    display: flex;
     justify-content: center;
     height: fit-content;
 }
