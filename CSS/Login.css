@@ -1,14 +1,11 @@
 #Input_bar{
     display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+    
+} 
+#Input_bar label {
+    text-align: center;
 
-}
-#Account_input_box{
-    display: flex;
-    justify-content: center;
-    height: fit-content;
-}
-#Password_input_box{
-    display: flex;
-    justify-content: center;
-    height: fit-content;
 }
