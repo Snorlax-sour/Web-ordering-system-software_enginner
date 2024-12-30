@@ -16,8 +16,8 @@ body {
 }
 
 .header-img {
-    width: 100%;
-    height: auto;
+    width: 50%;
+    height: 50%;
 }
 
 /* 可滑動分類標籤容器 */
@@ -64,7 +64,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%; /* 調整容器寬度 */
+    width: 100%; /* 調整容器寬度 */
     margin: 10px auto;
 }
 
