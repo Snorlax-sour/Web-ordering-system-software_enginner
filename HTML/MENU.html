@@ -31,7 +31,7 @@
 
     <!-- 菜單內容 -->
     <div id="menu" class="menu">
-        <!-- 預設顯示主餐 -->
+        <!-- 主餐 -->
         <div class="menu-item" data-category="main">
             <img src="../IMAGE/fired_rice.webp" alt="義大利鳳梨炒飯">
             <div class="item-details">
@@ -113,6 +113,22 @@
                 <h3>冰淇淋</h3>
                 <p>成份：牛奶、糖、巧克力</p>
             </div>
+        </div>
+    </div>
+
+    <!-- 彈出式視窗 -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" id="closePopup">&times;</span>
+            <div class="popup-options">
+                <label><input type="checkbox" id="no-spicy"> 不要辣</label><br>
+                <label><input type="checkbox" id="no-coriander"> 不要香菜</label><br>
+                <label><input type="checkbox" id="no-egg"> 不要蛋</label>
+            </div>
+            <h2 id="popupTitle">餐點名稱</h2>
+            <p id="popupDescription">餐點描述</p>
+            <p><strong>價格：</strong><span id="popupPrice">0</span> 元</p>
+            <button id="confirmOrder">加入購物車</button>
         </div>
     </div>
 

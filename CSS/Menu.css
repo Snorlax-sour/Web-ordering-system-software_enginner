@@ -122,6 +122,73 @@ body {
     word-wrap: break-word; /* 長字換行 */
 }
 
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+  
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+  
+.popup {
+    display: none; /* 預設隱藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    justify-content: center;
+    align-items: center;
+}
+  
+/* 彈出式視窗 */
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  
+.popup-content h2 {
+    margin: 0 0 10px;
+}
+  
+.popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}  
+
+.popup-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 讓 checkbox 和標籤對齊左邊 */
+}
+
+.popup-options label {
+    font-size: 24px; /* 調整 checkbox 標籤的字體大小 */
+}
+
+.popup-options input[type="checkbox"] {
+    transform: scale(1.5); /* 放大 checkbox */
+}
+
 /* 底部導航欄 */
 .footer {
     display: flex;
