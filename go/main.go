@@ -1,11 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
 
 func main() {
+	db := connect_sqlite()
+	if db == nil {
+		log.Println("Database connection failed, and will return.")
+		return // if database connection failed, return from main
+	}
+	defer db.db.Close()
+	fmt.Println("We now have a database connection and can use it")
+
 	// 提供靜態文件的路徑
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", http.FileServer(http.Dir("../CSS"))))
 	http.Handle("/JS/", http.StripPrefix("/JS/", http.FileServer(http.Dir("../JS"))))
@@ -23,4 +32,5 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }
