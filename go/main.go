@@ -1,9 +1,12 @@
 package main
 
 import (
+	// "bufio"
 	"fmt"
 	"log"
 	"net/http"
+	// "os"
+	// "strings"
 )
 
 func main() {
@@ -12,6 +15,17 @@ func main() {
 		log.Println("Database connection failed, and will return.")
 		return // if database connection failed, return from main
 	}
+	// reader := bufio.NewReader(os.Stdin)
+	// fmt.Print("Enter username:")
+	// username, _ := reader.ReadString('\n')
+	// username = strings.TrimSpace(username)
+
+	// fmt.Print("Enter Password:")
+	// password, _ := reader.ReadString('\n')
+	// password = strings.TrimSpace(password)
+
+	// insert_value_User(db, username, password)
+
 	defer db.db.Close()
 	fmt.Println("We now have a database connection and can use it")
 
