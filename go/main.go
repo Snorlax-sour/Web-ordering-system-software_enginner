@@ -1,50 +1,51 @@
 package main
 
 import (
-	// "bufio"
 	"fmt"
 	"log"
 	"net/http"
-	// "os"
-	// "strings"
 )
 
 func main() {
-	db := connect_sqlite()
-	if db == nil {
-		log.Println("Database connection failed, and will return.")
-		return // if database connection failed, return from main
+	fmt.Println("Starting database connection...")
+	db, err := connect_sqlite()
+	if err != nil {
+		log.Fatalf("Database connection failed: %v", err) // Use Fatalf for errors
 	}
-	// reader := bufio.NewReader(os.Stdin)
-	// fmt.Print("Enter username:")
-	// username, _ := reader.ReadString('\n')
-	// username = strings.TrimSpace(username)
-
-	// fmt.Print("Enter Password:")
-	// password, _ := reader.ReadString('\n')
-	// password = strings.TrimSpace(password)
-
-	// insert_value_User(db, username, password)
-
-	defer db.db.Close()
+	defer db.db.Close() // Close the connection in defer, after it is used
+	hashPassword("test")
+	hashPassword("1234")
+	hashPassword("ji3g4go6?")
 	fmt.Println("We now have a database connection and can use it")
+	_, ok := db.insert_value_User("boss", "ej03xu35k3")
+	if ok {
+		fmt.Println("Sucessfully inserted user")
+	}
+	// Call show all users here
+	allUsernames, ok := db.show_all_User()
+	if ok {
+		fmt.Println("printing usernames:")
+		for _, userName := range allUsernames {
+			log.Println(userName)
+		}
+	}
 
-	// 提供靜態文件的路徑
+	// Serve Static Files
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", http.FileServer(http.Dir("../CSS"))))
 	http.Handle("/JS/", http.StripPrefix("/JS/", http.FileServer(http.Dir("../JS"))))
 	http.Handle("/IMAGE/", http.StripPrefix("/IMAGE/", http.FileServer(http.Dir("../IMAGE"))))
 	http.Handle("/HTML/", http.StripPrefix("/HTML/", http.FileServer(http.Dir("../HTML"))))
 
-	// 將 "/" 路徑重定向到首頁
+	// Redirect to homepage
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/HTML/index.html", http.StatusFound)
 	})
 
-	// 啟動伺服器
-	log.Println("伺服器正在執行：http://localhost:8080")
-	err := http.ListenAndServe(":8080", nil)
+	// Start Server
+	log.Println("Server is listening on: http://localhost:8080")
+	err = http.ListenAndServe(":8080", nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Failed to start server: %v", err)
 	}
 
 }
