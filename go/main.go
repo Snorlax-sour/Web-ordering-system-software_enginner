@@ -13,22 +13,23 @@ func main() {
 		log.Fatalf("Database connection failed: %v", err) // Use Fatalf for errors
 	}
 	defer db.db.Close() // Close the connection in defer, after it is used
-	hashPassword("test")
-	hashPassword("1234")
-	hashPassword("ji3g4go6?")
+
 	fmt.Println("We now have a database connection and can use it")
-	_, ok := db.insert_value_User("boss", "ej03xu35k3")
-	if ok {
-		fmt.Println("Sucessfully inserted user")
+	operation_sucessful := db.verify_User_password("boss", "ej03xu35k3")
+	if operation_sucessful {
+		fmt.Println("Sucessfully verified user")
+	} else { // else 必須和 if 的右大括號在同一行：
+		fmt.Println("verified user failed")
 	}
+
 	// Call show all users here
-	allUsernames, ok := db.show_all_User()
-	if ok {
-		fmt.Println("printing usernames:")
-		for _, userName := range allUsernames {
-			log.Println(userName)
-		}
-	}
+	// allUsernames, ok := db.show_all_User()
+	// if ok {
+	// 	fmt.Println("printing usernames:")
+	// 	for _, userName := range allUsernames {
+	// 		log.Println(userName)
+	// 	}
+	// }
 
 	// Serve Static Files
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", http.FileServer(http.Dir("../CSS"))))

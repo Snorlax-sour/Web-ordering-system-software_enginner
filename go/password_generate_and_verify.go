@@ -41,6 +41,10 @@ func hashPassword(password string) (string, string, error) {
 	return string(hashedPassword), salt, nil // 返回雜湊密碼與 Salt
 }
 func verifyPassword(password string, storedHash string, salt string) bool {
+	if password == "" || storedHash == "" || salt == "" {
+		log.Println("empty input with password: ", password, " or storeHash: ", storedHash, " or salt value", salt)
+		return false
+	}
 	passwordWithSalt := password + salt
 	err := bcrypt.CompareHashAndPassword([]byte(storedHash), []byte(passwordWithSalt))
 	return err == nil // 如果無錯誤，則密碼匹配

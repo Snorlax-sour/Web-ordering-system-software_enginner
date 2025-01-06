@@ -136,3 +136,33 @@ func (db *DB) show_all_User() ([]string, bool) {
 	}
 	return userNames, true
 }
+func (db *DB) verify_User_password(user_name string, user_input_password string) bool {
+	if db == nil {
+		return fmt.Errorf("database connection is nil") == nil
+	}
+	if user_name == "" || user_input_password == "" {
+		log.Println("empty input username: ", user_name, " or input password: ", user_input_password)
+		return false
+	}
+	username, operation_sucessful := db.show_User(user_name)
+	if (username == user_name) && operation_sucessful {
+		query := "SELECT user_password, user_salt FROM User WHERE user_name = ?"
+
+		row := db.db.QueryRow(query, username)
+		var user_hash_password string
+		var user_salt string
+
+		// 提取結果
+		err := row.Scan(&user_hash_password, &user_salt)
+
+		if err != nil {
+			if err == sql.ErrNoRows {
+				return fmt.Errorf("user not found") == nil
+			}
+			return fmt.Errorf("error querying database: %v", err) == nil
+		}
+		operation_sucessful = verifyPassword(user_input_password, user_hash_password, user_salt)
+		return operation_sucessful
+	}
+	return false
+}
