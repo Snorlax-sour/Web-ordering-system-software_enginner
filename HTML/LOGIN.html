@@ -11,9 +11,9 @@
         
     </head>
     <body class="Pale_blue_background" id="input_place_1">
-        <header>
-            <a href="./HOME_PAGE.html"> <img class="HOME_ICON" src="../IMAGE/HOME_ICON.png" alt="回到首頁">  </a>
-        </header>
+        <a href="./HOME_PAGE.html" class="home-icon-link">
+            <img class="home-icon" src="../IMAGE/HOME_ICON.png" alt="回到首頁">
+        </a> 
         <form id="Input_bar"> 
             <label for="Account_input_box" > Account:</label> 
             <!-- the label uncessary but good for search engine optimation (SEO) and crawlers -->
@@ -21,8 +21,10 @@
             <input id="Account_input_box" type="text" placeholder="請輸入您的帳號" class="Account_info" required> <br>
         <!-- placeholder attribute name is the prompt -->
             <label for="Password_input_box"> Password: </label> 
-            <input id="Password_input_box" type="password" placeholder="請輸入您的密碼" class="Account_info" required   > <br>
-            <button type="submit" class="Purple_button" >  驗證帳號密碼 </button>
+            <input id="Password_input_box" type="password" placeholder="請輸入您的密碼" class="Account_info" required> <br>
+            <div class="Purple_button"> 
+                <button id="account" type="button" value="login"> 驗證帳號密碼 </button>
+            </div>
         </form>
         <script src="../JS/Login.js"></script>
     </body>

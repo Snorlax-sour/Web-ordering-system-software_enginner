@@ -26,10 +26,3 @@ header img {
 body{
     background-color: #F8FED9;
 }
-button{
-    background-color: #9E1ADB;  
-    width: 40vw;
-    height: 60px;
-    border-radius: 5px;
-    margin: 1vh ;
-}
