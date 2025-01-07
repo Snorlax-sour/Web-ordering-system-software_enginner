@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"net/http"
 
 	_ "github.com/mattn/go-sqlite3" // Import the driver
 )
@@ -165,4 +166,26 @@ func (db *DB) verify_User_password(user_name string, user_input_password string)
 		return operation_sucessful
 	}
 	return false
+}
+func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request)  {
+	if r.Method != http.MethodPost { // 只接受 POST 請求
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return 
+	}
+
+	err := r.ParseForm() // 解析表單
+	if err != nil {
+		http.Error(w, "Error parsing form", http.StatusBadRequest)
+		return 
+	}
+
+	username := r.FormValue("username") // 讀取 username 參數
+	password := r.FormValue("password") // 讀取 password 參數
+
+	log.Println("Received POST request with username:", username, "and password:", password)
+	operation_sucessful := db.verify_User_password(username, password)
+	if operation_sucessful {
+		fmt.Fprintf(w, "<h1> Hello %s </h1>", username)
+	}
+	return
 }
