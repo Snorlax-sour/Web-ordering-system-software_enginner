@@ -48,7 +48,7 @@ document.getElementById('submitOrder').addEventListener('click', () => {
     localStorage.removeItem('cart');
     const orderId = generateOrderId(); // 生成訂單編號
     localStorage.setItem('orderId', orderId); // 將訂單編號存入 LocalStorage
-    window.location.href = '../HTML/ORDER_CONFIRMATION.html'; // 跳轉到確認頁面
+    window.location.href = '../HTML/order_confirmation.html'; // 跳轉到確認頁面
 });
 
 // 生成 10 位隨機字母和數字
