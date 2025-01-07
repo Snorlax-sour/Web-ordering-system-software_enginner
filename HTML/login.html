@@ -14,18 +14,14 @@
         <a href="./home_page.html" class="home-icon-link">
             <img class="home-icon" src="../IMAGE/HOME_ICON.png" alt="回到首頁">
         </a> 
-        <form id="Input_bar" action="/Login" method="post"> 
-            <label for="Account_input_box" > Account:</label> 
-            <!-- the label uncessary but good for search engine optimation (SEO) and crawlers -->
-            <!-- label for need to match id -->
+        <form id="Input_bar" action="/Login" method="POST">
+            <label for="Account_input_box" > Account:</label>
             <input id="Account_input_box" type="text" placeholder="請輸入您的帳號" class="Account_info" name="username" required> <br>
-        <!-- placeholder attribute name is the prompt -->
-            <label for="Password_input_box"> Password: </label> 
+            <label for="Password_input_box"> Password: </label>
             <input id="Password_input_box" type="password" placeholder="請輸入您的密碼" class="Account_info" name="password"  required> <br>
-            <div class="Purple_button"> 
-                <button id="account" type="button" value="login"> 驗證帳號密碼 </button>
+            <div class="Purple_button">
+               <button id="account" type="submit" value="login"> 驗證帳號密碼 </button>
             </div>
-        </form>
-        <script src="../JS/login.js"></script>
+         </form>
     </body>
 </html>

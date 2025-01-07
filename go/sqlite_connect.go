@@ -167,16 +167,16 @@ func (db *DB) verify_User_password(user_name string, user_input_password string)
 	}
 	return false
 }
-func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request)  {
+func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost { // 只接受 POST 請求
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return 
+		return
 	}
 
 	err := r.ParseForm() // 解析表單
 	if err != nil {
 		http.Error(w, "Error parsing form", http.StatusBadRequest)
-		return 
+		return
 	}
 
 	username := r.FormValue("username") // 讀取 username 參數
