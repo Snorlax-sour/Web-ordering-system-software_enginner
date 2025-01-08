@@ -14,13 +14,13 @@ func main() {
 	}
 	defer db.db.Close() // Close the connection in defer, after it is used
 
-	fmt.Println("We now have a database connection and can use it")
-	operation_sucessful := db.verify_User_password("boss", "ej03xu35k3")
-	if operation_sucessful {
-		fmt.Println("Sucessfully verified user")
-	} else { // else 必須和 if 的右大括號在同一行：
-		fmt.Println("verified user failed")
-	}
+	// fmt.Println("We now have a database connection and can use it")
+	// operation_sucessful := db.verify_User_password("front", "fu06t;3bp6m06")
+	// if operation_sucessful {
+	// 	fmt.Println("Sucessfully verified user")
+	// } else { // else 必須和 if 的右大括號在同一行：
+	// 	fmt.Println("verified user failed")
+	// }
 
 	// Call show all users here
 	// allUsernames, ok := db.show_all_User()
@@ -42,7 +42,7 @@ func main() {
 	})
 
 	// 業務邏輯： 登入、開始點餐按鈕按下去的處理
-	http.HandleFunc("/Login", db.submitHandler)
+	http.HandleFunc("/login", db.submitHandler)
 	// start order
 	// change to /start_order
 	http.HandleFunc("/start_order", db.startOrderHandler)
