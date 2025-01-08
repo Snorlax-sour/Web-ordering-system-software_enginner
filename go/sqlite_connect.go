@@ -25,11 +25,18 @@ func connect_sqlite() (*DB, error) {
 		log.Println("Error connecting to database:", err)
 		return nil, err
 	}
+	// Enable foreign key constraints.
+	_, err = db.Exec("PRAGMA foreign_keys = ON;")
+	if err != nil {
+		log.Println("Error enabling foreign key constraints:", err)
+		db.Close() // Close the database if we failed
+		return nil, err
+	}
 	//  key should be an authentication key to encrypt the cookie
 	//  make sure to replace it with your own key for your applications
 	key := "your-secret-authentication-key"              // Replace with a strong key
 	sessionStore := sessions.NewCookieStore([]byte(key)) // create a cookie store
-	fmt.Println("Successfully connected to SQLite database!")
+	fmt.Println("Successfully connected to SQLite database with foreign keys enabled!")
 	return &DB{db: db, filepath: file, sessionStore: sessionStore}, nil
 }
 
@@ -195,7 +202,6 @@ func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	log.Println("Received POST request with username:", username, "and password:", password)
-<<<<<<< HEAD
 	operation_successful := db.verify_User_password(username, password)
 	var redirectURL string
 	if operation_successful {
@@ -219,7 +225,7 @@ func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
             <head>
             <meta charset="utf-8">
             <title>驗證成功</title>
-            <meta http-equiv="refresh" content="5;url={{.RedirectURL}}" />
+            <meta http-equiv="refresh" content="2;url={{.RedirectURL}}" />
             </head>
             <body>
             <h1> Hello {{.Username}} </h1>
@@ -241,7 +247,7 @@ func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
             <head>
             <meta charset="utf-8">
             <title>驗證失敗</title>
-            <meta http-equiv="refresh" content="0;url=/HTML/login.html" />
+            <meta http-equiv="refresh" content="2;url=/HTML/login.html" />
             </head>
             <body>
             <h1> 帳號密碼錯誤 </h1>
@@ -255,12 +261,6 @@ func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		t.Execute(w, data)
 		return
-=======
-	operation_sucessful := db.verify_User_password(username, password)
-	if operation_sucessful {
-		// fmt.Fprintf(w, "<h1> Hello %s </h1>", username)
-		http.ServeFile(w, r, `..\HTML\manage_home_page.html`)
->>>>>>> aaa6a6e7b5edf31250b13ef71c0e32e70484817d
 	}
 }
 func (db *DB) startOrderHandler(w http.ResponseWriter, r *http.Request) {
@@ -291,7 +291,7 @@ func (db *DB) startOrderHandler(w http.ResponseWriter, r *http.Request) {
         <head>
         <meta charset="utf-8">
         <title>跳转中...</title>
-        <meta http-equiv="refresh" content="3;url={{.RedirectURL}}" />
+        <meta http-equiv="refresh" content="1;url={{.RedirectURL}}" />
         </head>
         <body>
           
