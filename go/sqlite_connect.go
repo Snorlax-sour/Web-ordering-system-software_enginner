@@ -283,7 +283,7 @@ func (db *DB) startOrderHandler(w http.ResponseWriter, r *http.Request) {
 	} else if username == "boss" {
 		redirectURL = "/HTML/manage_home_page.html"
 	} else {
-		redirectURL = "/HTML/home_page.html"
+		redirectURL = "/HTML/menu.html" // 搞錯檔案
 	}
 	tmpl := `
         <!DOCTYPE html>
