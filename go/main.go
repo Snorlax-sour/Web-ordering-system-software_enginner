@@ -59,6 +59,7 @@ func main() {
 	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "../HTML/manage_home_page.html", http.StatusFound)
 	})
+	http.HandleFunc("/Login", db.submitHandler)
 
 	// Start Server
 	log.Println("Server is listening on: http://localhost:8080")
