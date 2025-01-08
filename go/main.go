@@ -46,6 +46,8 @@ func main() {
 	// start order
 	// change to /start_order
 	http.HandleFunc("/start_order", db.startOrderHandler)
+	// manage ingredient
+	http.HandleFunc("/manage_ingredient", db.manageIngredientHandler)
 	// Start Server
 	log.Println("Server is listening on: http://localhost:8080")
 	err = http.ListenAndServe(":8080", nil)

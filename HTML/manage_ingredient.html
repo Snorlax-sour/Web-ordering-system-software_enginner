@@ -1,19 +1,21 @@
-<!-- 購物車頁面 -->
 <!DOCTYPE html>
 <html lang="zh-TW">
     <head>
-        <title> 餐點進度 </title>
+        <title> 食材管理 </title>
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../CSS/basic_icon_or_something_with_component.css">
         <link rel="stylesheet" href="../CSS/normalize.css">
         <link rel="stylesheet" href="../CSS/manage_financial.css">
+        <meta http-equiv="refresh" content="60" /> <!-- 初始的自动刷新间隔 60 秒 -->
     </head>
     <body>
         <div class="search-container">
             <input type="text" placeholder="食材名稱/剩餘存量/過期日期/備註">
             <button class="search-button">🔍</button>
         </div>
-        
+        <div class="Purple_button">
+            <a href="/manage_ingredient">   <button id="manage_ingredient" type="button" value="login_interface"> 食材管理 </button> </a>
+         </div>
         <div class="result-container">
             <p class="date">搜尋結果</p>
             <table class="result-table">
@@ -26,30 +28,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>鳳梨</td>
-                        <td>17顆</td>
-                        <td>2025/01/31</td>
-                        <td>未削皮</td>
-                    </tr>
-                    <tr>
-                        <td>雞蛋</td>
-                        <td>120顆</td>
-                        <td>2025/01/15</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>低筋麵粉</td>
-                        <td>20袋</td>
-                        <td>2026/01/01</td>
-                        <td></td>
-                    </tr>
+                   {{range .}}
+                       <tr>
+                           <td>{{.IngredientName}}</td>
+                           <td>{{.IngredientRemainingInventory}}</td>
+                           <td>{{.IngredientExpiryDate}}</td>
+                           <td>{{.IngredientNote}}</td>
+                        </tr>
+                   {{end}}
                 </tbody>
             </table>
         </div>        
         <a href="./manage_home_page.html" class="home-icon-link">
             <img class="home-icon" src="../IMAGE/arrow-left.png" alt="管理者首頁">
         </a>            
-        <script></script>
+        <script src="../JS/ingredient_refresh.js"> </script>
     </body>
 </html>

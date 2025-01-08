@@ -306,3 +306,65 @@ func (db *DB) startOrderHandler(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, data)
 	return
 }
+
+// struct to store the query result of ingredient table
+type IngredientData struct {
+	IngredientName               string
+	IngredientRemainingInventory int
+	IngredientExpiryDate         string
+	IngredientNote               string
+}
+
+// func to store all ingredient data
+func (db *DB) getAllIngredientData() ([]IngredientData, error) {
+	query := "SELECT ingredient_name, ingredient_remaining_inventory, ingredient_expiry_date, ingredient_delivery_date FROM Ingredient where ingredient_visable = 1;"
+	rows, err := db.db.Query(query)
+	if err != nil {
+		log.Println("Error querying ingredient data", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var allIngredientData []IngredientData
+	for rows.Next() {
+		var data IngredientData
+		var ingredientDeliveryDate sql.NullString
+		err := rows.Scan(&data.IngredientName, &data.IngredientRemainingInventory, &data.IngredientExpiryDate, &ingredientDeliveryDate)
+		if err != nil {
+			log.Println("Error scanning ingredient data", err)
+			return nil, err
+		}
+
+		if ingredientDeliveryDate.Valid {
+			data.IngredientNote = ingredientDeliveryDate.String
+		}
+
+		allIngredientData = append(allIngredientData, data)
+	}
+	if err := rows.Err(); err != nil {
+		log.Println("error iterating ingredient rows:", err)
+		return nil, err
+	}
+
+	return allIngredientData, nil
+}
+func (db *DB) manageIngredientHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("manageIngredientHandler called")
+	ingredientData, err := db.getAllIngredientData()
+	if err != nil {
+		http.Error(w, "Error querying ingredient data", http.StatusInternalServerError)
+		return
+	}
+	tmpl, err := template.ParseFiles("../HTML/manage_ingredient.html")
+	if err != nil {
+		log.Println("Error parsing html files", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	err = tmpl.Execute(w, ingredientData) // assign to err to check the error
+	if err != nil {
+		log.Println("Error executing template:", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+}
