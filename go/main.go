@@ -37,6 +37,10 @@ func main() {
 	http.Handle("/IMAGE/", http.StripPrefix("/IMAGE/", http.FileServer(http.Dir("../IMAGE"))))
 	http.Handle("/HTML/", http.StripPrefix("/HTML/", http.FileServer(http.Dir("../HTML"))))
 
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/HTML/home_page.html", http.StatusFound)
+	})
+
 	// 業務邏輯： 登入、開始點餐按鈕按下去的處理
 	http.HandleFunc("/Login", db.submitHandler)
 	// start order
