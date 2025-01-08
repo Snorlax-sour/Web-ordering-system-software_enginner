@@ -9,19 +9,47 @@
         <link rel="stylesheet" href="../CSS/manage_financial.css">
     </head>
     <body>
-        <div class="cart-container">
-            <h1>購物車</h1>
-            <div id="cartItems"></div>
-            <!-- 新增總金額與按鈕 -->
-            <div class="cart-summary">
-                <p id="totalAmount">總金額: 0 元</p>
-                <button id="clearCart">清空購物車</button>
-                <button id="submitOrder">確認送出訂單</button>
-            </div>
-            <a href="./home_page.html" class="home-icon-link">
-                <img class="home-icon" src="../IMAGE/HOME_ICON.png" alt="回到首頁">
-            </a>            
+        <div class="search-container">
+            <input type="text" placeholder="查詢日期/金額/餐點/餐點編碼">
+            <button class="search-button">🔍</button>
         </div>
-        <!-- <script src="../JS/order_process.js"></script> -->
+        
+        <div class="result-container">
+            <p class="date">2025/1/9 搜尋結果</p>
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>時間</th>
+                        <th>金額</th>
+                        <th>類型</th>
+                        <th>細項</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20:00</td>
+                        <td>170</td>
+                        <td>收入</td>
+                        <td>餐點收入</td>
+                    </tr>
+                    <tr>
+                        <td>14:15</td>
+                        <td>11712</td>
+                        <td>支出</td>
+                        <td>某人的薪水</td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>1050</td>
+                        <td>支出</td>
+                        <td>餐點費用</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>        
+        <a href="./manage_home_page.html" class="home-icon-link">
+            <img class="home-icon" src="../IMAGE/arrow-left.png" alt="管理者首頁">
+        </a>            
+        <script></script>
     </body>
 </html>

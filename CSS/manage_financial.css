@@ -6,45 +6,74 @@ body {
     background-color: #f9f9f9;
 }
 
-/* 菜單項目 */
-.menu-item {
+/* 搜尋欄樣式 */
+.search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
-    padding: 20px;
+    background-color: #C4E0F9; /* 綠色背景 */
+    padding: 10px;
+}
+
+.search-container input {
+    width: 70%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-container .search-button {
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: none;
+    padding: 8px 15px;
+    margin-left: 5px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.menu-item:hover {
-    background-color: #f0f0f0;
+/* 搜尋結果區域 */
+.result-container {
+    text-align: center;
+    margin-top: 20px;
 }
 
-/* 購物車樣式 */
-.cart-container {
-    padding: 20px;
-    max-width: 600px;
-    margin: auto;
-}
-
-.cart-item {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    padding: 10px;
+.result-container .date {
+    font-size: 20px;
+    background-color: #a4d3fc; /* 淺藍色背景 */
+    padding: 5px 10px;
     border-radius: 5px;
+    color: #fff;
+    display: inline-block;
 }
 
-.cart-item-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin-right: 10px;
+/* 表格樣式 */
+.result-table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.result-table th {
+    background-color: #ffcc33; /* 黃色背景 */
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.result-table td {
+    background-color: #C4E0F9; /* 淺綠色背景 */
+    padding: 10px;
+    text-align: center;
+}
+
+.result-table tr:nth-child(even) td {
+    background-color: #a4d3fc; /* 偶數列不同背景色 */
+}
+
+.result-table tr:hover td {
+    background-color: #81b2d0; /* 滑鼠懸停效果 */
 }
 
 button {
@@ -58,22 +87,4 @@ button {
 
 button:hover {
     background-color: #510375;
-}
-
-/* 計算總金額 */
-.cart-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8f8f8;
-    padding: 15px;
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-#totalAmount {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
 }
