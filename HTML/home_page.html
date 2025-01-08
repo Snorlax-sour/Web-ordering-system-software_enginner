@@ -17,7 +17,10 @@
             <br>
             <a href="./login.html"> <button id="Account_login" type="Account_login" value="login_interface"> 管理者登入 </button></a>
             <a href="./order_process.html">  <button id="Ording_status" type="Ording_status" value="Search_status"> 餐點進度 </button></a>
-            <a href="./menu.html"> <button id="Start_your_order" type="ordering" value="Ordering_menu"> 開始點餐 </button></a>
+            <form action="/start_order" method="POST">
+                <button type="submit" class="Purple_button" >開始點餐</button>
+            </form>
+            <!-- <a href="./menu.html"> <button id="Start_your_order" type="ordering" value="Ordering_menu"> 開始點餐 </button></a> -->
         </div> 
     </body>
 </html>

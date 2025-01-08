@@ -195,6 +195,7 @@ func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	log.Println("Received POST request with username:", username, "and password:", password)
+<<<<<<< HEAD
 	operation_successful := db.verify_User_password(username, password)
 	var redirectURL string
 	if operation_successful {
@@ -254,6 +255,12 @@ func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		t.Execute(w, data)
 		return
+=======
+	operation_sucessful := db.verify_User_password(username, password)
+	if operation_sucessful {
+		// fmt.Fprintf(w, "<h1> Hello %s </h1>", username)
+		http.ServeFile(w, r, `..\HTML\manage_home_page.html`)
+>>>>>>> aaa6a6e7b5edf31250b13ef71c0e32e70484817d
 	}
 }
 func (db *DB) startOrderHandler(w http.ResponseWriter, r *http.Request) {

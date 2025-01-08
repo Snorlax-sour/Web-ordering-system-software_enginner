@@ -23,13 +23,13 @@ func main() {
 	}
 
 	// Call show all users here
-	// allUsernames, ok := db.show_all_User()
-	// if ok {
-	// 	fmt.Println("printing usernames:")
-	// 	for _, userName := range allUsernames {
-	// 		log.Println(userName)
-	// 	}
-	// }
+	allUsernames, ok := db.show_all_User()
+	if ok {
+		fmt.Println("printing usernames:")
+		for _, userName := range allUsernames {
+			log.Println(userName)
+		}
+	}
 
 	// Serve Static Files
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", http.FileServer(http.Dir("../CSS"))))
@@ -51,7 +51,17 @@ func main() {
 	})
 	// Redirect to homepage
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+<<<<<<< HEAD
 		http.Redirect(w, r, "/HTML/home_page.html", http.StatusFound)
+=======
+		http.Redirect(w, r, "../HTML/home_page.html", http.StatusFound)
+	})
+	// http.HandleFunc("/login", db.submitHandler)
+
+	// 登入後管理頁面路由
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "../HTML/manage_home_page.html", http.StatusFound)
+>>>>>>> aaa6a6e7b5edf31250b13ef71c0e32e70484817d
 	})
 
 	// 業務邏輯： 登入、開始點餐按鈕按下去的處理

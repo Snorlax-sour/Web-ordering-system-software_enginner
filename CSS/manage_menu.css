@@ -184,7 +184,7 @@ button:hover {
     top: 10px;
     right: 15px;
     font-size: 24px;
-    cursor: pointer;
+    cursor: pointer;    
 }  
 
 .popup-options {
@@ -193,13 +193,16 @@ button:hover {
     align-items: flex-start; /* 讓 checkbox 和標籤對齊左邊 */
 }
 
-.popup-options label {
-    font-size: 24px; /* 調整 checkbox 標籤的字體大小 */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
-.popup-options input[type="checkbox"] {
-    transform: scale(1.5); /* 放大 checkbox */
+.popup-buttons button {
+    width: 45%;
 }
+
 
 /* 底部導航欄 */
 .footer {
