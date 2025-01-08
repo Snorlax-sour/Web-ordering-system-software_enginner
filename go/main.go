@@ -23,13 +23,13 @@ func main() {
 	}
 
 	// Call show all users here
-	// allUsernames, ok := db.show_all_User()
-	// if ok {
-	// 	fmt.Println("printing usernames:")
-	// 	for _, userName := range allUsernames {
-	// 		log.Println(userName)
-	// 	}
-	// }
+	allUsernames, ok := db.show_all_User()
+	if ok {
+		fmt.Println("printing usernames:")
+		for _, userName := range allUsernames {
+			log.Println(userName)
+		}
+	}
 
 	// Serve Static Files
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", http.FileServer(http.Dir("../CSS"))))
@@ -37,9 +37,27 @@ func main() {
 	http.Handle("/IMAGE/", http.StripPrefix("/IMAGE/", http.FileServer(http.Dir("../IMAGE"))))
 	http.Handle("/HTML/", http.StripPrefix("/HTML/", http.FileServer(http.Dir("../HTML"))))
 
+	http.HandleFunc("/CSS", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprintln(w, "404 Page Not Found")
+	})
+	http.HandleFunc("/JS", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprintln(w, "404 Page Not Found")
+	})
+	http.HandleFunc("/IMAGE", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprintln(w, "404 Page Not Found")
+	})
 	// Redirect to homepage
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/HTML/index.html", http.StatusFound)
+		http.Redirect(w, r, "../HTML/home_page.html", http.StatusFound)
+	})
+	// http.HandleFunc("/login", db.submitHandler)
+
+	// 登入後管理頁面路由
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "../HTML/manage_home_page.html", http.StatusFound)
 	})
 
 	// Start Server
