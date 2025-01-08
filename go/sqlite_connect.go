@@ -368,3 +368,56 @@ func (db *DB) manageIngredientHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+type FinancialData struct {
+	FinancialDate           string
+	FinancialActionCost     int
+	FinancialActionType     string
+	FinancialActionDescribe string
+}
+
+func (db *DB) getAllFinancialData() ([]FinancialData, error) {
+	query := "SELECT financial_date, financial_action_cost, financial_action_type, financial_action_describe FROM Financial_Management where financial_visable = 1;"
+	rows, err := db.db.Query(query)
+	if err != nil {
+		log.Println("Error querying financial data", err)
+		return nil, err
+	}
+	defer rows.Close()
+
+	var allFinancialData []FinancialData
+	for rows.Next() {
+		var data FinancialData
+		err = rows.Scan(&data.FinancialDate, &data.FinancialActionCost, &data.FinancialActionType, &data.FinancialActionDescribe)
+		if err != nil {
+			log.Println("Error scanning financial data:", err)
+			return nil, err
+		}
+		allFinancialData = append(allFinancialData, data)
+	}
+	if err = rows.Err(); err != nil {
+		log.Println("error iterating financial rows", err)
+		return nil, err
+	}
+	return allFinancialData, nil
+}
+func (db *DB) manageFinancialHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("manageFinancialHandler called")
+	financialData, err := db.getAllFinancialData()
+	if err != nil {
+		http.Error(w, "Error querying financial data", http.StatusInternalServerError)
+		return
+	}
+	tmpl, err := template.ParseFiles("../HTML/manage_financial.html")
+	if err != nil {
+		log.Println("Error parsing html files", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	err = tmpl.Execute(w, financialData) // assign to err to check the error
+	if err != nil {
+		log.Println("Error executing template:", err)
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+}

@@ -48,6 +48,8 @@ func main() {
 	http.HandleFunc("/start_order", db.startOrderHandler)
 	// manage ingredient
 	http.HandleFunc("/manage_ingredient", db.manageIngredientHandler)
+	// manage financial
+	http.HandleFunc("/manage_financial", db.manageFinancialHandler)
 	// Start Server
 	log.Println("Server is listening on: http://localhost:8080")
 	err = http.ListenAndServe(":8080", nil)
