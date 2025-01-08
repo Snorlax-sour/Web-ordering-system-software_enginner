@@ -5,8 +5,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center; /* 整體居中 */
-    transform: scale(0.7); /* 整體縮小 30% */
-    transform-origin: top center; /* 縮放從頂部中心開始 */
 }
 
 /* 頂部圖片區域 */
@@ -22,12 +20,12 @@ body {
 
 /* 可滑動分類標籤容器 */
 .categories-wrapper {
-    width: 80%; /* 容器寬度調整 */
+    width: 100%; /* 容器寬度調整 */
     margin: 0 auto; /* 水平居中 */
     overflow-x: auto; /* 水平滾動 */
     white-space: nowrap; /* 禁止內容換行 */
     background-color: #FFF2CC; /* 淡黃色背景 */
-    padding: 10px 0;
+    padding: 30px 0;
     display: flex;
     justify-content: center; /* 水平置中分類標籤 */
     scroll-behavior: smooth; /* 平滑滾動效果 */
@@ -35,7 +33,7 @@ body {
 
 .categories {
     display: flex;
-    gap: 20px;
+    gap: 50px;
 }
 
 .category {
@@ -52,6 +50,9 @@ body {
     width: 120px; /* 固定寬度，確保一致 */
     height: 40px; /* 固定高度，確保一致 */
     line-height: 40px; /* 垂直居中 */
+}
+.category:hover{
+    background-color: #caac00;
 }
 
 .category.active {
@@ -83,12 +84,16 @@ body {
     display: flex;
     align-items: center;
     background-color: #C4E0F9; /* 藍色背景 */
-    margin: 10px 0;
-    padding: 10px;
+    margin: 10px 10px;
+    padding: 20px;
     width: 90%; /* 固定內容寬度比例 */
     max-width: 500px; /* 最大寬度 */
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item:hover {
+    background-color: #81b2d0;
 }
 
 /* 菜單項目的圖片 */
@@ -130,14 +135,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #f4f4f9;
 }
   
 button {
     padding: 10px 20px;
-    font-size: 16px;
+    background-color: #a600ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #510375;
 }
   
 .popup {
@@ -191,12 +203,11 @@ button {
 
 /* 底部導航欄 */
 .footer {
+    position: fixed;
+    bottom: 0; /* 距離底部 0 像素 */
     display: flex;
     justify-content: space-around;
     background-color: #B8E0F9; /* 淡藍色背景 */
-    padding: 10px 0;        
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 
@@ -205,7 +216,11 @@ button {
     border: none;
 }
 
+.nav-btn:hover {
+    background-color: #81b2d0;
+}
+
 .nav-btn img {
-    width: 30px; /* 固定寬度 */
-    height: 30px; /* 固定高度 */
+    width: 50px; /* 固定寬度 */
+    height: 50px; /* 固定高度 */
 }
