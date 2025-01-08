@@ -3,15 +3,18 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 
+	"github.com/gorilla/sessions"
 	_ "github.com/mattn/go-sqlite3" // Import the driver
 )
 
 type DB struct {
-	db       *sql.DB
-	filepath string
+	db           *sql.DB
+	filepath     string
+	sessionStore *sessions.CookieStore
 }
 
 // CHANGED: added error return
@@ -22,9 +25,12 @@ func connect_sqlite() (*DB, error) {
 		log.Println("Error connecting to database:", err)
 		return nil, err
 	}
-
+	//  key should be an authentication key to encrypt the cookie
+	//  make sure to replace it with your own key for your applications
+	key := "your-secret-authentication-key"              // Replace with a strong key
+	sessionStore := sessions.NewCookieStore([]byte(key)) // create a cookie store
 	fmt.Println("Successfully connected to SQLite database!")
-	return &DB{db: db, filepath: file}, nil
+	return &DB{db: db, filepath: file, sessionStore: sessionStore}, nil
 }
 
 // (db_name *DB)類似於class的部份的method
@@ -167,25 +173,129 @@ func (db *DB) verify_User_password(user_name string, user_input_password string)
 	}
 	return false
 }
+
+type ResponseData struct {
+	Username    string
+	RedirectURL string
+}
+
 func (db *DB) submitHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost { // 只接受 POST 請求
+	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	err := r.ParseForm() // 解析表單
+	err := r.ParseForm()
 	if err != nil {
 		http.Error(w, "Error parsing form", http.StatusBadRequest)
 		return
 	}
 
-	username := r.FormValue("username") // 讀取 username 參數
-	password := r.FormValue("password") // 讀取 password 參數
+	username := r.FormValue("username")
+	password := r.FormValue("password")
 
 	log.Println("Received POST request with username:", username, "and password:", password)
-	operation_sucessful := db.verify_User_password(username, password)
-	if operation_sucessful {
-		fmt.Fprintf(w, "<h1> Hello %s </h1>", username)
+	operation_successful := db.verify_User_password(username, password)
+	var redirectURL string
+	if operation_successful {
+		// Set session data
+		session, err := db.sessionStore.Get(r, "session-name") // the session name is "session-name"
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		session.Values["username"] = username
+		session.Save(r, w) // save session
+		if username == "boss" {
+			redirectURL = "/HTML/manage_home_page.html"
+		} else {
+			redirectURL = "/HTML/home_page.html"
+		}
+
+		tmpl := `
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <meta charset="utf-8">
+            <title>驗證成功</title>
+            <meta http-equiv="refresh" content="5;url={{.RedirectURL}}" />
+            </head>
+            <body>
+            <h1> Hello {{.Username}} </h1>
+            </body>
+            </html>
+        `
+		t := template.Must(template.New("response").Parse(tmpl))
+		data := ResponseData{
+			Username:    username,
+			RedirectURL: redirectURL,
+		}
+		t.Execute(w, data)
+		return
+	} else {
+
+		tmpl := `
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <meta charset="utf-8">
+            <title>驗證失敗</title>
+            <meta http-equiv="refresh" content="0;url=/HTML/login.html" />
+            </head>
+            <body>
+            <h1> 帳號密碼錯誤 </h1>
+            </body>
+            </html>
+        `
+		redirectURL = "/HTML/login.html"
+		t := template.Must(template.New("response").Parse(tmpl))
+		data := ResponseData{
+			RedirectURL: redirectURL,
+		}
+		t.Execute(w, data)
+		return
 	}
+}
+func (db *DB) startOrderHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("startOrderHandler called")
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Get session data
+	session, err := db.sessionStore.Get(r, "session-name")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	username, ok := session.Values["username"].(string)
+	var redirectURL string
+	if !ok {
+		redirectURL = "/HTML/home_page.html"
+	} else if username == "boss" {
+		redirectURL = "/HTML/manage_home_page.html"
+	} else {
+		redirectURL = "/HTML/home_page.html"
+	}
+	tmpl := `
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="utf-8">
+        <title>跳转中...</title>
+        <meta http-equiv="refresh" content="3;url={{.RedirectURL}}" />
+        </head>
+        <body>
+          
+        </body>
+        </html>
+    `
+
+	t := template.Must(template.New("response").Parse(tmpl))
+	data := ResponseData{
+		RedirectURL: redirectURL,
+	}
+	t.Execute(w, data)
 	return
 }

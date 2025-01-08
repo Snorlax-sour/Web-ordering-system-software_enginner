@@ -51,10 +51,13 @@ func main() {
 	})
 	// Redirect to homepage
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/HTML/index.html", http.StatusFound)
+		http.Redirect(w, r, "/HTML/home_page.html", http.StatusFound)
 	})
-	http.HandleFunc("/Login", db.submitHandler)
 
+	// 業務邏輯： 登入、開始點餐按鈕按下去的處理
+	http.HandleFunc("/Login", db.submitHandler)
+	// start order
+	http.HandleFunc("/start_order", db.startOrderHandler)
 	// Start Server
 	log.Println("Server is listening on: http://localhost:8080")
 	err = http.ListenAndServe(":8080", nil)
