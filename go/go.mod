@@ -1,13 +1,11 @@
-module main/http_server_v0
+module example.com/m/v2
 
-go 1.23.1
-
-require (
-	github.com/mattn/go-sqlite3 v1.14.24
-	golang.org/x/crypto v0.32.0
-)
+go 1.18
 
 require (
-	github.com/gorilla/securecookie v1.1.2 // indirect
-	github.com/gorilla/sessions v1.4.0 // indirect
+	github.com/gorilla/sessions v1.4.0
+	github.com/mattn/go-sqlite3 v1.14.28
+	golang.org/x/crypto v0.38.0
 )
+
+require github.com/gorilla/securecookie v1.1.2 // indirect
